@@ -34,3 +34,27 @@ class NoteFunc:
                 print(f"Title: {note.title}")
                 print(f"Content: {note.content}")
                 print(f"Date Created: {note.date_created}\n")
+
+    def run(self):
+        while True:
+            print("\nMenu:")
+            print("1. Create note")
+            print("2. Delete note")
+            print("3. Show all notes")
+            print("4. Exit")
+
+            try:
+                choice = int(input("Choose an option: "))
+                if choice == 1:
+                    self.create_note()
+                elif choice == 2:
+                    self.delete_note()
+                elif choice == 3:
+                    self.show_notes()
+                elif choice == 4:
+                    print("End")
+                    break
+                else:
+                    print("Error")
+            except ValueError:
+                print("Error")
