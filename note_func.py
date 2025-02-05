@@ -113,3 +113,37 @@ class NoteFunc:
         self.root.title("Notes")
         self.notes = []
         self.view()
+
+    def view(self):
+        self.title_label = Label(self.root, text="Title:")
+        self.title_label.pack(padx=10, pady=5)
+
+        self.title_entry = Entry(self.root, width=40)
+        self.title_entry.pack(padx=10, pady=5)
+
+        self.content_label = Label(self.root, text="Content:")
+        self.content_label.pack(padx=10, pady=5)
+
+        self.content_entry = Text(self.root, height=5, width=40)
+        self.content_entry.pack(padx=10, pady=5)
+
+        self.create_button = Button(self.root, text="Create note", command=self.create_note)
+        self.create_button.pack(pady=10)
+
+        self.delete_title_label = Label(self.root, text="Enter title to delete:")
+        self.delete_title_label.pack(padx=10, pady=5)
+
+        self.delete_title_entry = Entry(self.root, width=40)
+        self.delete_title_entry.pack(padx=10, pady=5)
+
+        self.delete_button = Button(self.root, text="Delete note", command=self.delete_note)
+        self.delete_button.pack(pady=5)
+
+        self.load_button = Button(self.root, text="Load notes from file", command=self.load_notes)
+        self.load_button.pack(pady=5)
+
+        self.notes_listbox = Listbox(self.root, width=50, height=10)
+        self.notes_listbox.pack(padx=10, pady=5)
+
+        self.exit_button = Button(self.root, text="Exit", command=self.root.quit)
+        self.exit_button.pack(pady=10)
