@@ -198,3 +198,37 @@ class NoteFunc:
 
         for note in self.notes:
             self.notes_listbox.insert(END, f"Title: {note.title} | Date: {note.date_created}")
+
+    def load_notes(self):
+        file_path = filedialog.askopenfilename(title="Choose notes file", filetypes=[("Text files", "*.txt")])
+        if not file_path:
+            return
+
+        if not os.path.exists(file_path):
+            messagebox.showerror("Error", "Empty")
+            return
+
+        try:
+            with open(file_path, 'r') as file:
+                lines = file.readlines()
+                self.notes.clear()
+                note = None
+
+                for line in lines:
+                    if line.startswith("Title:"):
+                        if note:
+                            self.notes.append(note)
+                        note = Note(line[len("Title: "):].strip(), "")
+                    elif line.startswith("Content:"):
+                        note.content = line[len("Content: "):].strip()
+                    elif line.startswith("Date:"):
+                        note.date_created = line[len("Date: "):].strip()
+
+                if note:
+                    self.notes.append(note)
+
+            messagebox.showinfo("Success", "Notes loaded")
+            self.show_notes()
+
+        except Exception:
+            messagebox.showerror("Error", "Loading error")
