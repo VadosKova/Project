@@ -10,3 +10,18 @@ class NoteFunc:
         new_note = Note(title, content)
         self.notes.append(new_note)
         print("Created")
+
+    def delete_note(self):
+        title = input("Enter the title of the note: ")
+        note_to_delete = None
+
+        for note in self.notes:
+            if note.title == title:
+                note_to_delete = note
+                break
+
+        if note_to_delete:
+            self.notes.remove(note_to_delete)
+            print("Deleted")
+        else:
+            print("Error")
