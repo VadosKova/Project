@@ -1,15 +1,25 @@
 from note import Note
+import os
 
 class NoteFunc:
     def __init__(self):
         self.notes = []
+        self.file_path = "notes.txt"
 
     def create_note(self):
         title = input("Title: ")
         content = input("Content: ")
         new_note = Note(title, content)
         self.notes.append(new_note)
-        print("Created")
+
+        try:
+            with open(self.file_path, 'a') as file:
+                file.write(f"Title: {new_note.title}\n")
+                file.write(f"Content: {new_note.content}\n")
+                file.write(f"Date: {new_note.date_created}\n")
+            print(f"Note '{new_note.title}' created and saved")
+        except Exception:
+            print("Error")
 
     def delete_note(self):
         title = input("Enter the title of the note: ")
