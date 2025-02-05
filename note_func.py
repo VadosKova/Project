@@ -192,3 +192,9 @@ class NoteFunc:
             messagebox.showinfo("Success", f"Note '{note_to_delete.title}' deleted")
         else:
             messagebox.showerror("Error", f"Note '{title_to_delete}' not found")
+
+    def show_notes(self):
+        self.notes_listbox.delete(0, END)
+
+        for note in self.notes:
+            self.notes_listbox.insert(END, f"Title: {note.title} | Date: {note.date_created}")
