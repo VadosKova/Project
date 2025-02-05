@@ -1,4 +1,10 @@
+from tkinter import *
 from note_func import NoteFunc
 
-note = NoteFunc()
-note.run()
+#консоль
+# note = NoteFunc()
+# note.run()
+
+root = Tk()
+note = NoteFunc(root)
+root.mainloop()
