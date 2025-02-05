@@ -82,7 +82,8 @@ class NoteFunc:
             print("1. Create note")
             print("2. Delete note")
             print("3. Show all notes")
-            print("4. Exit")
+            print("4. Load notes from file")
+            print("5. Exit")
 
             try:
                 choice = int(input("Choose an option: "))
@@ -93,6 +94,8 @@ class NoteFunc:
                 elif choice == 3:
                     self.show_notes()
                 elif choice == 4:
+                    self.load_notes()
+                elif choice == 5:
                     print("End")
                     break
                 else:
