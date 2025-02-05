@@ -25,3 +25,12 @@ class NoteFunc:
             print("Deleted")
         else:
             print("Error")
+
+    def show_notes(self):
+        if not self.notes:
+            print("Empty")
+        else:
+            for note in self.notes:
+                print(f"Title: {note.title}")
+                print(f"Content: {note.content}")
+                print(f"Date Created: {note.date_created}\n")
