@@ -172,3 +172,23 @@ class NoteFunc:
         self.title_entry.delete(0, END)
         self.content_entry.delete("1.0", END)
         self.show_notes()
+
+    def delete_note(self):
+        title_to_delete = self.delete_title_entry.get()
+
+        if not title_to_delete:
+            messagebox.showerror("Error", "Enter the title of the note")
+            return
+
+        note_to_delete = None
+        for note in self.notes:
+            if note.title == title_to_delete:
+                note_to_delete = note
+                break
+
+        if note_to_delete:
+            self.notes.remove(note_to_delete)
+            self.show_notes()
+            messagebox.showinfo("Success", f"Note '{note_to_delete.title}' deleted")
+        else:
+            messagebox.showerror("Error", f"Note '{title_to_delete}' not found")
