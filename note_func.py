@@ -45,6 +45,37 @@ class NoteFunc:
                 print(f"Content: {note.content}")
                 print(f"Date Created: {note.date_created}\n")
 
+    def load_notes(self):
+        file_path = input("Path to note file: ")
+
+        if not os.path.exists(file_path):
+            print("Error")
+            return
+
+        try:
+            with open(file_path, 'r') as file:
+                lines = file.readlines()
+                self.notes.clear()
+                note = None
+
+                for line in lines:
+                    if line.startswith("Title:"):
+                        if note:
+                            self.notes.append(note)
+                        note = Note(line[len("Title: "):].strip(), "")
+                    elif line.startswith("Content:"):
+                        note.content = line[len("Content: "):].strip()
+                    elif line.startswith("Date:"):
+                        note.date_created = line[len("Date: "):].strip()
+
+                if note:
+                    self.notes.append(note)
+
+            print("Notes loaded")
+            self.show_notes()
+        except Exception:
+            print("Error")
+
     def run(self):
         while True:
             print("\nMenu:")
