@@ -147,3 +147,28 @@ class NoteFunc:
 
         self.exit_button = Button(self.root, text="Exit", command=self.root.quit)
         self.exit_button.pack(pady=10)
+
+    def create_note(self):
+        title = self.title_entry.get()
+        content = self.content_entry.get("1.0", "end-1c")
+
+        if not title or not content:
+            messagebox.showerror("Error", "Write title and content")
+            return
+
+        new_note = Note(title, content)
+        self.notes.append(new_note)
+
+        try:
+            file_path = "notes.txt"
+            with open(file_path, 'a') as file:
+                file.write(f"Title: {new_note.title}\n")
+                file.write(f"Content: {new_note.content}\n")
+                file.write(f"Date: {new_note.date_created}\n")
+            messagebox.showinfo("Success", f"Note '{new_note.title}' created and saved")
+        except Exception:
+            messagebox.showerror("Error", "Not saved")
+
+        self.title_entry.delete(0, END)
+        self.content_entry.delete("1.0", END)
+        self.show_notes()
